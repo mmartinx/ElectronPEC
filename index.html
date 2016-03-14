@@ -4,22 +4,26 @@
     <meta charset="UTF-8">
     <title>Hello World!</title>
     <link rel="stylesheet" href="./css/app.css">
+    <link rel="stylesheet" href="./node_modules/font-awesome/css/font-awesome.min.css">
     <script>var $ = jQuery = require('jquery');</script>
   </head>
   <body>
-    <h1>Hello World!</h1>
-    <h2>Test</h2>
-    We are using node <script>document.write(process.versions.node)</script>,
-    Chromium <script>document.write(process.versions.chrome)</script>,
-    and Electron <script>document.write(process.versions.electron)</script>.
-    <ul class="photos">
+    <div class="left-nav">
+      <ul class="nav-list">
+        <li><i class="fa fa-home"></i> Home</li>
+      </ul>
+    </div>
+    <div class="main">
+      <i class="fa fa-bluetooth"></i>
+      <ul class="photos">
 
-    </ul>
+      </ul>
+    </div>
   </body>
   <script>
-    const Photos = require('./js/photos');
+    const Photos = require('./lib/photos');
     $(function() {
-      Photos.getPhotos().forEach((p) => {
+      Photos.getPhotos().forEach(p => {
         $('.photos').append('<img src="./photos/' + p + '">');
       });
     });
