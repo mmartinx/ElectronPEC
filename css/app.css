@@ -1,0 +1,8 @@
+body {
+  font-family: "Lucida Grande";
+}
+
+.photos img {
+  width:50px;
+  height:50px;
+}
