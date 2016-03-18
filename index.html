@@ -5,27 +5,42 @@
     <title>Hello World!</title>
     <link rel="stylesheet" href="./css/app.css">
     <link rel="stylesheet" href="./node_modules/font-awesome/css/font-awesome.min.css">
-    <script>var $ = jQuery = require('jquery');</script>
+    <script>window.$ = window.jQuery = require('jquery');</script>
   </head>
   <body>
     <div class="left-nav">
       <ul class="nav-list">
-        <li><i class="fa fa-home"></i> Home</li>
+        <li id="home"><i class="fa fa-home"></i> Home</li>
+        <li id="users"><i class="fa fa-user"></i> Users</li>
       </ul>
     </div>
     <div class="main">
-      <i class="fa fa-bluetooth"></i>
-      <ul class="photos">
 
-      </ul>
+    </div>
+    <div class="photos">
+      
     </div>
   </body>
   <script>
+    'use strict';
     const Photos = require('./lib/photos');
+    const app = require('./lib/app');
+
+    app.on('rendered', rendered => $('.main').html(rendered));
+
     $(function() {
-      Photos.getPhotos().forEach(p => {
-        $('.photos').append('<img src="./photos/' + p + '">');
+      app.emit('view-selected', 'home');
+
+      $('.nav-list li').on('click', function(ev) {
+        ev.preventDefault();
+        let id = $(this).attr('id');
+        app.emit('view-selected', id);
       });
+
+
+      // Photos.getPhotos()
+      //       .forEach(p => $('.photos')
+      //       .append('<img src="./photos/' + p + '">'));
     });
   </script>
 </html>

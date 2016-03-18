@@ -28,6 +28,7 @@
   "dependencies": {
     "electron-reload": "^0.2.0",
     "font-awesome": "^4.5.0",
+    "handlebars": "^4.0.5",
     "jquery": "^2.2.1",
     "underscore": "^1.8.3"
   }
