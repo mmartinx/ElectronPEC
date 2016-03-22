@@ -25,10 +25,26 @@
     'use strict';
     const Photos = require('./lib/photos');
     const app = require('./lib/app');
+    const DB = require('./lib/db');
+    const request = require('request');
 
     app.on('rendered', rendered => $('.main').html(rendered));
 
     $(function() {
+      const specs = new DB('specs');
+      if (specs.query().length === 0) {
+        request('http://172.17.0.114/intranet/net/inventory/electron_pec.aspx', (error, response, body) => {
+          specs.save(JSON.parse(body));
+
+          let filtered = specs.query(item => {
+            return item.Name.indexOf('Mill') > -1;
+          });
+
+          let filtered2 = specs.query({ProductId: 499});
+          console.log(filtered2[0]);
+        });
+      }
+
       app.emit('view-selected', 'home');
 
       $('.nav-list li').on('click', function(ev) {
@@ -36,11 +52,6 @@
         let id = $(this).attr('id');
         app.emit('view-selected', id);
       });
-
-
-      // Photos.getPhotos()
-      //       .forEach(p => $('.photos')
-      //       .append('<img src="./photos/' + p + '">'));
     });
   </script>
 </html>

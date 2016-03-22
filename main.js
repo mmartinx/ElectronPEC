@@ -1,11 +1,8 @@
 'use strict';
 
 const electron = require('electron');
-// Module to control application life.
 const app = electron.app;
-// Module to create native browser window.
 const BrowserWindow = electron.BrowserWindow;
-
 require('electron-reload')(__dirname);
 
 // Keep a global reference of the window object, if you don't, the window will
@@ -31,8 +28,6 @@ function createWindow () {
   });
 }
 
-// This method will be called when Electron has finished
-// initialization and is ready to create browser windows.
 app.on('ready', createWindow);
 
 // Quit when all windows are closed.
