@@ -3,6 +3,8 @@
 const electron = require('electron');
 const app = electron.app;
 const BrowserWindow = electron.BrowserWindow;
+const DB = require('./lib/db');
+const request = require('request');
 require('electron-reload')(__dirname);
 
 // Keep a global reference of the window object, if you don't, the window will
@@ -14,7 +16,7 @@ function createWindow () {
   mainWindow = new BrowserWindow({width: 800, height: 600});
 
   // and load the index.html of the app.
-  mainWindow.loadURL('file://' + __dirname + '/index.html');
+  mainWindow.loadURL('file://' + __dirname + '/public/index.html');
 
   // Open the DevTools.
   mainWindow.webContents.openDevTools();
@@ -26,6 +28,13 @@ function createWindow () {
     // when you should delete the corresponding element.
     mainWindow = null;
   });
+
+  let specs = new DB('specs');
+  if (specs.query().length === 0) {
+    request('http://172.17.0.114/intranet/net/inventory/electron_pec.aspx', (error, response, body) => {
+      specs.save(JSON.parse(body));
+    });
+  }
 }
 
 app.on('ready', createWindow);
