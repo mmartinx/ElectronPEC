@@ -18,7 +18,7 @@
 
     </div>
     <div class="photos">
-      
+
     </div>
   </body>
   <script>
@@ -44,6 +44,10 @@
           console.log(filtered2[0]);
         });
       }
+
+      console.log(specs.query((item) => {
+        return item.Name.indexOf('Mill') > -1;
+      }));
 
       app.emit('view-selected', 'home');
 
