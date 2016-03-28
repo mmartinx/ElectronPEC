@@ -108,8 +108,6 @@ describe('DB Specs', () => {
     });
 
     it('Returns an empty object literal if no match', () => {
-      let person = { Name: 'Jon' };
-      db.save(person);
       let noMatch = db.fetch('fake');
       assert.deepEqual(noMatch, {});
     });
