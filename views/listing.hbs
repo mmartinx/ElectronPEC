@@ -1,0 +1,10 @@
+{{#if listing}}
+  <h1>Edit listing</h1>
+{{else}}
+  <h1>New listing</h1>
+{{/if}}
+<input type="hidden" class="hdn-bucket-id" value="{{bucket.id}}">
+Listing #: <input type="text" class="txt-list-id" value="{{listing.listId}}">
+Description: <input type="text" class="txt-description" value="{{listing.description}}">
+<br>
+<button class="btn-save-listing">Save</button>
