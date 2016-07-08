@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <h1>home</h1>
 <input type="text" class="spec-name" value="{{term}}">
 {{#each Mills}}
@@ -6,3 +7,18 @@
   </p>
 {{/each}}
 <h1>Test</h1>
+=======
+<h1>Welcome to offline PEC</h1>
+<form>
+  <input type="text" class="txt-bucket-name">
+  <button class="btn-new-bucket">Start a new bucket</button>
+</form>
+{{#if buckets}}
+  <hr>
+  <ul>
+  {{#each buckets}}
+    <li data-id="{{id}}"><a class="view-bucket" href="#">{{name}}</a> <button class="btn-delete-bucket"><i class="fa fa-trash"></i></li>
+  {{/each}}
+  </ul>
+{{/if}}
+>>>>>>> e7743a5dadace49190ee84721cd93e5bc9d4267b

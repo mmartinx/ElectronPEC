@@ -1,0 +1,11 @@
+<h1>{{name}}</h1>
+<input type="hidden" class="hdn-bucket-id" value="{{id}}">
+<button class="btn-new-listing">Add a new listing</button>
+{{#if listings}}
+  <hr>
+  <ul>
+  {{#each listings}}
+    <li><a data-listid="{{listId}}" class="view-listing" href="#">{{listId}} - {{description}}</a></li>
+  {{/each}}
+  </ul>
+{{/if}}

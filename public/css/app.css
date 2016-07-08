@@ -16,6 +16,10 @@ body {
   cursor: pointer;
 }
 
+.nav-list li.active {
+  background-color:green;
+}
+
 .left-nav {
   width:200px;
   position:absolute;
@@ -35,7 +39,7 @@ body {
   height:100%;
   position:absolute;
   width:100%;
-  padding:0;
+  padding:20px;
   margin:0;
 }
 
