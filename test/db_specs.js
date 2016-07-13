@@ -3,7 +3,7 @@ const assert = require('assert');
 const DB = require('../lib/db');
 const moment = require('moment');
 
-let testableDb = function() {
+let testableDb = function () {
   let db = new DB('test');
   db.clear();
   return new DB('test');
@@ -30,7 +30,7 @@ describe('DB Specs', () => {
   describe('Saving', () => {
     describe('A single element', () => {
       it('Saves a single element', () => {
-        db.save({Name: 'Steve'});
+        db.save({ Name: 'Steve' });
         assert.equal(db.query().length, 1);
       });
 
@@ -84,9 +84,9 @@ describe('DB Specs', () => {
     describe('Multiple elements', () => {
       it('Saves arrays of elements', () => {
         let people = [
-          { Name: 'Jim'},
-          { Name: 'Jon'},
-          { Name: 'Ron'}
+          { Name: 'Jim' },
+          { Name: 'Jon' },
+          { Name: 'Ron' }
         ];
 
         db.save(people);
@@ -96,12 +96,12 @@ describe('DB Specs', () => {
 
       it('Gives unique ids when saving new items', () => {
         db.save([
-          { Name: 'Jim'},
-          { Name: 'Ron'}
+          { Name: 'Jim' },
+          { Name: 'Ron' }
         ]);
 
-        let jim = db.query({Name: 'Jim'})[0];
-        let ron = db.query({Name: 'Ron'})[0];
+        let jim = db.query({ Name: 'Jim' })[0];
+        let ron = db.query({ Name: 'Ron' })[0];
 
         assert.ok(jim.id);
         assert.ok(ron.id);
@@ -110,8 +110,8 @@ describe('DB Specs', () => {
 
       it('Updates elements with existing ids', () => {
         db.save([
-          { Name: 'Jim'},
-          { Name: 'Ron'}
+          { Name: 'Jim' },
+          { Name: 'Ron' }
         ]);
 
         let people = db.query();
@@ -120,7 +120,7 @@ describe('DB Specs', () => {
       });
 
       it('Returns the same elements with an id and created timestamp when saved', () => {
-        let people = [{ Name: 'Jon' }, { Name: 'Jim'}];
+        let people = [{ Name: 'Jon' }, { Name: 'Jim' }];
         let result = db.save(people);
         assert.equal(people.length, result.length);
         for (let i = 0; i < result.length; ++i) {
@@ -150,21 +150,21 @@ describe('DB Specs', () => {
   describe('Querying elements', () => {
     it('Returns matches on an object literal', () => {
       let people = [
-        { Name: 'Jim'},
-        { Name: 'Jon'},
-        { Name: 'Ron'}
+        { Name: 'Jim' },
+        { Name: 'Jon' },
+        { Name: 'Ron' }
       ];
       db.save(people);
 
-      let queried = db.query({Name: 'Ron'});
+      let queried = db.query({ Name: 'Ron' });
       assert.equal(queried.length, 1);
     });
 
     it('Returns matches on a function', () => {
       let people = [
-        { Name: 'Jim'},
-        { Name: 'Jon'},
-        { Name: 'Ron'}
+        { Name: 'Jim' },
+        { Name: 'Jon' },
+        { Name: 'Ron' }
       ];
       db.save(people);
 
@@ -179,17 +179,17 @@ describe('DB Specs', () => {
   describe('Deleting an element', () => {
     it('Deletes an element with an id', () => {
       let people = [
-        { Name: 'Jim'},
-        { Name: 'Jon'},
-        { Name: 'Ron'}
+        { Name: 'Jim' },
+        { Name: 'Jon' },
+        { Name: 'Ron' }
       ];
       db.save(people);
 
-      let ron = db.query({Name: 'Ron'})[0];
+      let ron = db.query({ Name: 'Ron' })[0];
       db.delete(ron);
       assert.equal(db.query().length, 2);
 
-      let jim = db.query({Name: 'Jim'})[0];
+      let jim = db.query({ Name: 'Jim' })[0];
       db.delete(jim.id);
       assert.equal(db.query().length, 1);
     });
